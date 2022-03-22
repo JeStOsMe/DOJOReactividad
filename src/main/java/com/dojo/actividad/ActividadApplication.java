@@ -110,9 +110,9 @@ public class ActividadApplication implements CommandLineRunner{
 
 		List<Correos> emails = generadorDeCorreos();
 
-		//usandoOperadorDistinct(emails);
+		usandoOperadorDistinct(emails);
 
-		//usandoOperadorFilter(emails);
+		usandoOperadorFilter(emails);
 
 		usandoOperadorMap(emails);
 		
