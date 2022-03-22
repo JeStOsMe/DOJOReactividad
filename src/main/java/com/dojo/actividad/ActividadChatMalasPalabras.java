@@ -26,8 +26,13 @@ public class ActividadChatMalasPalabras implements CommandLineRunner{
 
         Flux.fromIterable(chat)
             .map(mensaje -> {
-                //Falta la lógica
+                malasPalabras.forEach(palabra -> {
+                    if (mensaje.getChat().contains(palabra.getMalaPalabra())){
+                        //Falta lógica
+                    }
+                });
             })
+            .subscribe();
         
     }
 
