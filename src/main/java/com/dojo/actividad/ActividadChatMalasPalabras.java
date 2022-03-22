@@ -26,8 +26,8 @@ public class ActividadChatMalasPalabras implements CommandLineRunner{
         Flux.fromIterable(chat)
             .map(mensaje -> {
                 malasPalabras.forEach(palabra -> {
-                    if (mensaje.getChat().contains(palabra.getMalaPalabra())){
-                        mensaje.transformarAPalabraCorrecta(palabra.getMalaPalabra());
+                    if (mensaje.getChat().toUpperCase().contains(palabra.getMalaPalabra().toUpperCase())){
+                        mensaje.transformarAPalabraCorrecta(palabra.getMalaPalabra().toUpperCase());
                     }
                 });
                 return mensaje;
@@ -52,6 +52,7 @@ public class ActividadChatMalasPalabras implements CommandLineRunner{
         chat.add(new Chat("Darme un tarro de cerveza"));
         chat.add(new Chat("Hola. Buenos días"));
         chat.add(new Chat("Realmente, un tarro y un vaso funcionan para lo mismo"));
+        chat.add(new Chat("Realmente, un tArRo y un VasO funcionan para lo mismo"));
 
         return chat;
     }

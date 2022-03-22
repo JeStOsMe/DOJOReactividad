@@ -17,6 +17,7 @@ public class Chat {
     }
 
     public void transformarAPalabraCorrecta(String chat){
+        this.chat = this.chat.toUpperCase();
         this.chat = this.chat.replace(chat, "****");
     }
 
