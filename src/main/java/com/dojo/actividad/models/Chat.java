@@ -16,6 +16,10 @@ public class Chat {
         this.chat = chat;
     }
 
+    public void transformarAPalabraCorrecta(String chat){
+        this.chat = this.chat.replace(chat, "****");
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

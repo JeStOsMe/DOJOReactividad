@@ -8,11 +8,9 @@ import com.dojo.actividad.models.MalasPalabras;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import reactor.core.publisher.Flux;
 
-@SpringBootApplication
 public class ActividadChatMalasPalabras implements CommandLineRunner{
 
     public static void main(String[] args) {
@@ -24,15 +22,17 @@ public class ActividadChatMalasPalabras implements CommandLineRunner{
         List<MalasPalabras> malasPalabras = generadorDeMalasPalabras();
         List<Chat> chat = generadorDeChat();
 
+        System.out.println("\n\n\tEJERCICIO 2");
         Flux.fromIterable(chat)
             .map(mensaje -> {
                 malasPalabras.forEach(palabra -> {
                     if (mensaje.getChat().contains(palabra.getMalaPalabra())){
-                        //Falta lógica
+                        mensaje.transformarAPalabraCorrecta(palabra.getMalaPalabra());
                     }
                 });
+                return mensaje;
             })
-            .subscribe();
+            .subscribe(mensaje -> System.out.println("Mensaje: " + mensaje));
         
     }
 
@@ -40,6 +40,7 @@ public class ActividadChatMalasPalabras implements CommandLineRunner{
         List<MalasPalabras> malasPalabras = new ArrayList<>();
 
         malasPalabras.add(new MalasPalabras("vaso"));
+        malasPalabras.add(new MalasPalabras("tarro"));
         
         return malasPalabras;
     }
@@ -48,6 +49,9 @@ public class ActividadChatMalasPalabras implements CommandLineRunner{
         List<Chat> chat = new ArrayList<>();
 
         chat.add(new Chat("Resulta y acontece que este vaso está roto"));
+        chat.add(new Chat("Darme un tarro de cerveza"));
+        chat.add(new Chat("Hola. Buenos días"));
+        chat.add(new Chat("Realmente, un tarro y un vaso funcionan para lo mismo"));
 
         return chat;
     }

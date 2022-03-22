@@ -81,12 +81,13 @@ public class ActividadApplication implements CommandLineRunner{
 
 	public void usandoOperadorFilter(List<Correos> emails){
 		Flux.fromIterable(emails)
-			.groupBy(email -> email.getDominio())
+			.groupBy(email -> email.getDominio()) //Funciona si los correos son válidos
 			.flatMap(emailId -> emailId.collectList())
 			.subscribe(email -> {
-				System.out.println("Correos: " + email);
-				System.out.println("Cantidad: " + email.size());
+				System.out.println("\n\tCorreos: \n" + email);
+				System.out.println("\tCantidad: " + email.size());
 			});
+			
 	}
 
 	public void usandoOperadorMap(List<Correos> emails){
@@ -109,13 +110,19 @@ public class ActividadApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 
 		List<Correos> emails = generadorDeCorreos();
-
+		System.out.println("\n\nELIMINANDO CORREOS REPETIDOS Y CONTANDO");
 		usandoOperadorDistinct(emails);
 
+		System.out.println("\n\nAGRUPANDO CORREOS POR DOMINIO Y CONTANDO (Los no-válidos se toman en cuenta)");
 		usandoOperadorFilter(emails);
 
+		System.out.println("\n\nIMPRIMIENDO CORREOS VÁLIDOS Y NO-VÁLIDOS");
 		usandoOperadorMap(emails);
 		
+
+		//Ejercicio 2
+		ActividadChatMalasPalabras appEjercicio2 = new ActividadChatMalasPalabras();
+		appEjercicio2.run(args);
 		
 	}
 

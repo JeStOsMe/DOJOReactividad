@@ -17,7 +17,12 @@ public class Correos {
     }
 
     public String getDominio(){
-        return getCorreo().split("@")[1];
+        try{
+            String dominio = this.getCorreo().split("@")[1];
+            return dominio;
+        } catch (Exception ex){
+            return "no_valido";
+        }
     }
 
 
@@ -48,7 +53,7 @@ public class Correos {
 
     @Override
     public String toString() {
-        return "Correos [correo=" + correo + "]";
+        return "[correo=" + correo + "]";
     }
 
     
